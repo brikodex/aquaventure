@@ -1,0 +1,129 @@
+{
+  "common": {
+    "siteName": "AquaVenture",
+    "tagline": "Eco-friendly Water Excursions",
+    "location": "Sainte-Marie, Madagascar",
+    "bookNow": "Book Now",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "from": "From",
+    "perPerson": "/person",
+    "duration": "Duration",
+    "difficulty": "Difficulty",
+    "maxParticipants": "Max Participants",
+    "reviews": "reviews",
+    "ecoFriendly": "Eco-friendly"
+  },
+  "navigation": {
+    "home": "Home",
+    "activities": "Activities",
+    "about": "About",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "AquaVenture",
+    "subtitle": "Eco-friendly Water Excursions",
+    "description": "Discover the crystal-clear waters of Sainte-Marie through unique water activities, in harmony with nature and local communities.",
+    "cta": {
+      "explore": "Explore our activities",
+      "book": "Book now"
+    }
+  },
+  "activities": {
+    "title": "Our Featured Activities",
+    "subtitle": "Unforgettable experiences in the heart of the Indian Ocean",
+    "categories": {
+      "all": "All",
+      "water-sports": "Water Sports",
+      "excursions": "Excursions",
+      "fishing": "Fishing",
+      "diving": "Diving"
+    },
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "included": "Included",
+    "whatToBring": "What to bring",
+    "schedule": "Available times"
+  },
+  "features": {
+    "title": "Why Choose AquaVenture?",
+    "subtitle": "Our commitment to sustainable and memorable experiences",
+    "ecoResponsible": {
+      "title": "Eco-friendly",
+      "description": "Our activities respect the marine ecosystem and support local fishing communities."
+    },
+    "expertGuides": {
+      "title": "Expert Guides",
+      "description": "Our certified instructors accompany you safely for an optimal experience."
+    },
+    "premiumEquipment": {
+      "title": "Premium Equipment",
+      "description": "Top quality equipment, regularly maintained and renewed."
+    },
+    "localImpact": {
+      "title": "Positive Local Impact",
+      "description": "20% of our profits donated to marine protection associations and local families."
+    }
+  },
+  "testimonials": {
+    "title": "What Our Visitors Say",
+    "subtitle": "Thousands of satisfied adventurers"
+  },
+  "cta": {
+    "title": "Ready for Adventure?",
+    "subtitle": "Join us for an unforgettable experience in Sainte-Marie",
+    "newsletter": {
+      "title": "Stay informed",
+      "placeholder": "Your email",
+      "button": "Subscribe",
+      "success": "Thank you for subscribing!"
+    }
+  },
+  "booking": {
+    "title": "Book an Activity",
+    "selectDate": "Select a date",
+    "selectTime": "Select a time",
+    "participants": "Number of participants",
+    "contactInfo": "Contact Information",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "specialRequests": "Special requests",
+    "ecoDonation": "Eco-friendly donation (+€5 for marine protection)",
+    "total": "Total",
+    "confirm": "Confirm Booking",
+    "success": "Booking confirmed!",
+    "error": "An error occurred. Please try again."
+  },
+  "footer": {
+    "description": "Your partner for unforgettable and eco-friendly water adventures in Sainte-Marie, Madagascar.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "newsletter": "Newsletter",
+    "newsletterText": "Receive our exclusive offers and news",
+    "copyright": "© 2024 AquaVenture. All rights reserved.",
+    "ecoCommitment": "Committed to sustainable tourism"
+  },
+  "accessibility": {
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "toggleDarkMode": "Toggle dark mode",
+    "switchLanguage": "Switch language"
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email",
+    "invalidPhone": "Invalid phone number",
+    "minParticipants": "Minimum 1 participant required",
+    "maxParticipants": "Maximum number of participants exceeded"
+  }
+}

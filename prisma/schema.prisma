@@ -1,0 +1,347 @@
+// ============================================
+// AQUAVENTURE - PRISMA SCHEMA
+// Plateforme SaaS de réservation d'activités nautiques
+// Sainte-Marie, Madagascar
+// ============================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+/// Activity category types for water sports
+enum Category {
+  JET_SKI
+  BUOY
+  PADDLE
+  WAKEBOARD
+  FISHING
+  EXCURSION
+  DIVING
+}
+
+/// Activity difficulty levels
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+/// Booking status
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  PAID
+  CANCELLED
+  COMPLETED
+}
+
+/// User role for access control
+enum UserRole {
+  USER
+  EDITOR
+  ADMIN
+  SUPER_ADMIN
+}
+
+/// Payment status
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+// ============================================
+// MODELS
+// ============================================
+
+/// User model for authentication and bookings
+/// Supports multiple roles: USER, EDITOR, ADMIN, SUPER_ADMIN
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  password     String?
+  name         String?
+  firstName    String?
+  lastName     String?
+  image        String?
+  role         UserRole   @default(USER)
+  phone        String?
+  locale       String     @default("fr")
+  emailVerified DateTime?
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  // Relations
+  bookings     Booking[]
+  reviews      Review[]
+  submissions  Submission[]
+
+  @@map("users")
+}
+
+/// Activity model for water sports and excursions
+/// Full multilingual support (FR/EN)
+model Activity {
+  id               String     @id @default(cuid())
+  
+  // Multilingual fields (JSON objects with fr/en keys)
+  name             String     // JSON: { "fr": "...", "en": "..." }
+  slug             String     @unique
+  description      String     // JSON: { "fr": "...", "en": "..." }
+  shortDescription String     // JSON: { "fr": "...", "en": "..." }
+  
+  // Pricing and capacity
+  price            Float
+  currency         String     @default("EUR")
+  duration         Int        // Duration in minutes
+  maxParticipants  Int        @default(10)
+  minParticipants  Int        @default(1)
+  minAge           Int        @default(8)
+  
+  // Classification
+  difficulty       Difficulty @default(BEGINNER)
+  category         Category
+  
+  // Media
+  images           String     // JSON array of image URLs
+  mainImageIndex   Int        @default(0)
+  videoUrl         String?
+  
+  // Features
+  featured         Boolean    @default(false)
+  ecoFriendly      Boolean    @default(false)
+  ecoDescription   String?    // JSON: { "fr": "...", "en": "..." }
+  isActive         Boolean    @default(true)
+  
+  // Details (JSON arrays with fr/en translations)
+  included         String     // JSON: { "fr": [...], "en": [...] }
+  requirements     String     // JSON: { "fr": [...], "en": [...] }
+  schedule         String     // JSON array of time slots
+  
+  // Location
+  location         String     // Location name
+  meetingPoint     String?    // JSON: { "fr": "...", "en": "..." }
+  latitude         Float?
+  longitude        Float?
+  
+  // Stats
+  rating           Float      @default(0)
+  reviewCount      Int        @default(0)
+  bookingCount     Int        @default(0)
+  
+  // SEO
+  metaTitle        String?    // JSON: { "fr": "...", "en": "..." }
+  metaDescription  String?    // JSON: { "fr": "...", "en": "..." }
+  
+  // Timestamps
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  // Relations
+  bookings         Booking[]
+  reviews          Review[]
+  availability     Availability[]
+  images_activity  Image[]
+
+  @@index([category])
+  @@index([featured])
+  @@index([ecoFriendly])
+  @@map("activities")
+}
+
+/// Image model for activity images
+model Image {
+  id          String   @id @default(cuid())
+  url         String
+  alt         String?  // JSON: { "fr": "...", "en": "..." }
+  isMain      Boolean  @default(false)
+  order       Int      @default(0)
+  activityId  String?
+  activity    Activity? @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@map("images")
+}
+
+/// Availability model for activity schedules
+model Availability {
+  id           String   @id @default(cuid())
+  activityId   String
+  date         DateTime
+  timeSlot     String   // e.g., "09:00", "14:00"
+  maxSpots     Int
+  bookedSpots  Int      @default(0)
+  isAvailable  Boolean  @default(true)
+  price        Float?   // Override price for specific dates
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  activity     Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  @@unique([activityId, date, timeSlot])
+  @@map("availabilities")
+}
+
+/// Booking model for user reservations
+model Booking {
+  id              String        @id @default(cuid())
+  bookingNumber   String        @unique
+  userId          String
+  activityId      String
+  
+  // Date and time
+  date            DateTime
+  timeSlot        String
+  
+  // Participants
+  participants    Int           @default(1)
+  
+  // Pricing
+  basePrice       Float
+  totalAmount     Float
+  currency        String        @default("EUR")
+  ecoDonation     Float         @default(0)
+  
+  // Status
+  status          BookingStatus @default(PENDING)
+  paymentStatus   PaymentStatus @default(PENDING)
+  
+  // Payment
+  stripePaymentId String?
+  stripeSessionId String?
+  
+  // Contact info
+  contactName     String
+  contactEmail    String
+  contactPhone    String
+  specialRequests String?
+  
+  // Confirmation
+  confirmedAt     DateTime?
+  cancelledAt     DateTime?
+  cancellationReason String?
+  
+  // Timestamps
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activity        Activity      @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([activityId])
+  @@index([status])
+  @@map("bookings")
+}
+
+/// Review model for user feedback
+model Review {
+  id          String   @id @default(cuid())
+  userId      String
+  activityId  String
+  bookingId   String?
+  rating      Int      // 1-5 stars
+  title       String?
+  comment     String
+  isVerified  Boolean  @default(false) // Verified booking
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activity    Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  @@index([activityId])
+  @@map("reviews")
+}
+
+/// Newsletter subscription
+model Newsletter {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  locale    String   @default("fr")
+  active    Boolean  @default(true)
+  source    String?  // e.g., "homepage", "booking"
+  createdAt DateTime @default(now())
+
+  @@map("newsletters")
+}
+
+/// Contact form submissions
+model Submission {
+  id        String   @id @default(cuid())
+  type      String   // "contact", "deposer", "quote"
+  userId    String?
+  
+  // Contact info
+  name      String
+  email     String
+  phone     String?
+  
+  // Content
+  subject   String?
+  message   String
+  data      String?  // JSON for additional fields
+  
+  // Status
+  status    String   @default("new") // "new", "read", "replied", "closed"
+  notes     String?  // Admin notes
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([type])
+  @@index([status])
+  @@map("submissions")
+}
+
+/// Site settings (global configuration)
+model SiteSettings {
+  id              String   @id @default(cuid())
+  siteName        String   @default("AquaVenture")
+  siteDescription String?  // JSON: { "fr": "...", "en": "..." }
+  logo            String?
+  favicon         String?
+  email           String?
+  phone           String?
+  address         String?
+  socialLinks     String?  // JSON object
+  stripePublicKey String?
+  defaultLocale   String   @default("fr")
+  currency        String   @default("EUR")
+  ecoDonationAmount Float  @default(5)
+  commissionRate  Float    @default(0.10) // 10% commission
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+/// Admin dashboard stats cache
+model StatsCache {
+  id              String   @id @default(cuid())
+  type            String   @unique
+  data            String   // JSON
+  calculatedAt    DateTime @default(now())
+  expiresAt       DateTime
+
+  @@map("stats_cache")
+}

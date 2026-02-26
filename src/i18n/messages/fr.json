@@ -1,0 +1,129 @@
+{
+  "common": {
+    "siteName": "AquaVenture",
+    "tagline": "Excursions Nautiques Écoresponsables",
+    "location": "Sainte-Marie, Madagascar",
+    "bookNow": "Réserver",
+    "learnMore": "En savoir plus",
+    "viewAll": "Voir tout",
+    "from": "À partir de",
+    "perPerson": "/personne",
+    "duration": "Durée",
+    "difficulty": "Difficulté",
+    "maxParticipants": "Participants max",
+    "reviews": "avis",
+    "ecoFriendly": "Écoresponsable"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "activities": "Activités",
+    "about": "À propos",
+    "pricing": "Tarifs",
+    "contact": "Contact",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "logout": "Déconnexion"
+  },
+  "hero": {
+    "title": "AquaVenture",
+    "subtitle": "Excursions Nautiques Écoresponsables",
+    "description": "Découvrez les eaux cristallines de Sainte-Marie à travers des activités nautiques uniques, en harmonie avec la nature et les communautés locales.",
+    "cta": {
+      "explore": "Explorer nos activités",
+      "book": "Réserver maintenant"
+    }
+  },
+  "activities": {
+    "title": "Nos Activités Phares",
+    "subtitle": "Des expériences inoubliables au cœur de l'océan Indien",
+    "categories": {
+      "all": "Toutes",
+      "water-sports": "Sports nautiques",
+      "excursions": "Excursions",
+      "fishing": "Pêche",
+      "diving": "Plongée"
+    },
+    "difficulty": {
+      "beginner": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé"
+    },
+    "included": "Inclus",
+    "whatToBring": "À prévoir",
+    "schedule": "Horaires disponibles"
+  },
+  "features": {
+    "title": "Pourquoi choisir AquaVenture ?",
+    "subtitle": "Notre engagement pour des expériences durables et mémorables",
+    "ecoResponsible": {
+      "title": "Écoresponsable",
+      "description": "Nos activités respectent l'écosystème marin et soutiennent les communautés locales de pêcheurs."
+    },
+    "expertGuides": {
+      "title": "Guides experts",
+      "description": "Nos moniteurs certifiés vous accompagnent en toute sécurité pour une expérience optimale."
+    },
+    "premiumEquipment": {
+      "title": "Matériel premium",
+      "description": "Équipements de qualité supérieure, régulièrement entretenus et renouvelés."
+    },
+    "localImpact": {
+      "title": "Impact local positif",
+      "description": "20% de nos bénéfices reversés aux associations de protection marine et aux familles locales."
+    }
+  },
+  "testimonials": {
+    "title": "Ce que disent nos visiteurs",
+    "subtitle": "Des milliers d'aventuriers satisfaits"
+  },
+  "cta": {
+    "title": "Prêt pour l'aventure ?",
+    "subtitle": "Rejoignez-nous pour une expérience inoubliable à Sainte-Marie",
+    "newsletter": {
+      "title": "Restez informé",
+      "placeholder": "Votre email",
+      "button": "S'inscrire",
+      "success": "Merci pour votre inscription !"
+    }
+  },
+  "booking": {
+    "title": "Réserver une activité",
+    "selectDate": "Choisir une date",
+    "selectTime": "Choisir un horaire",
+    "participants": "Nombre de participants",
+    "contactInfo": "Informations de contact",
+    "name": "Nom complet",
+    "email": "Email",
+    "phone": "Téléphone",
+    "specialRequests": "Demandes spéciales",
+    "ecoDonation": "Don écoresponsable (+5€ pour la protection marine)",
+    "total": "Total",
+    "confirm": "Confirmer la réservation",
+    "success": "Réservation confirmée !",
+    "error": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "footer": {
+    "description": "Votre partenaire pour des aventures nautiques inoubliables et écoresponsables à Sainte-Marie, Madagascar.",
+    "quickLinks": "Liens rapides",
+    "contact": "Contact",
+    "followUs": "Suivez-nous",
+    "newsletter": "Newsletter",
+    "newsletterText": "Recevez nos offres exclusives et actualités",
+    "copyright": "© 2024 AquaVenture. Tous droits réservés.",
+    "ecoCommitment": "Engagé pour le tourisme durable"
+  },
+  "accessibility": {
+    "skipToContent": "Aller au contenu principal",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "toggleDarkMode": "Basculer en mode sombre",
+    "switchLanguage": "Changer de langue"
+  },
+  "errors": {
+    "required": "Ce champ est requis",
+    "invalidEmail": "Email invalide",
+    "invalidPhone": "Numéro de téléphone invalide",
+    "minParticipants": "Minimum 1 participant requis",
+    "maxParticipants": "Nombre maximum de participants dépassé"
+  }
+}
