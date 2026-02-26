@@ -15,14 +15,14 @@ import {
   Users,
   Star,
   MapPin,
-  Whale,
   Fish,
   Ship,
+  Sailboat,
   ArrowRight,
   Calendar,
   Check,
   Anchor,
-} from 'lucide-react'
+} from 'lucide-react'  // Whale icon not available; using Sailboat for marine theme
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -113,7 +113,7 @@ const ecoExperiences = [
 
 const impactStats = [
   { value: 2000, suffix: '€', label: 'Donnés aux associations locales', icon: Leaf },
-  { value: 500, suffix: '+', label: 'Observations de baleines', icon: Whale },
+  { value: 500, suffix: '+', label: 'Observations de baleines', icon: Sailboat },
   { value: 100, suffix: '%', label: 'Pratiques éco-certifiées', icon: Fish },
   { value: 50, suffix: '+', label: 'Familles locales soutenues', icon: Users },
 ]
